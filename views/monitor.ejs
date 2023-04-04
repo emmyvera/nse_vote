@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item d-none d-lg-block full-screen-link">
+              <a class="nav-link">
+                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-logout d-none d-lg-block">
+              <a class="nav-link" href="/adminDashboard/logout">
+                <i class="mdi mdi-power"></i>
+              </a>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">Admin</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/adminDashboard">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/members">
+                <span class="menu-title">Members</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/candidate">
+                <span class="menu-title">Candidate</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">
+                <span class="menu-title">Register</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                  <div class="card-body">
+                    <h4 class="font-weight-normal mb-3">No of Members</h4>
+                    <h2 class="mb-5"><%- result[0][0].member %></h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                  <div class="card-body">
+                    <h4 class="font-weight-normal mb-3">No of Qualified Voters</h4>
+                    <h2 class="mb-5">0</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                  <div class="card-body">
+                    <h4 class="font-weight-normal mb-3">No Already Voted</h4>
+                    <h2 class="mb-5"><%- result[1][0].no_voted %></h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Chairman chart</h4>
+                    <canvas id="barChart0" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Vice Chairman chart</h4>
+                    <canvas id="barChart1" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Gen. Secretary chart</h4>
+                    <canvas id="barChart2" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Asst. Gen. Secretary chart</h4>
+                    <canvas id="barChart3" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Tech. Secretary chart</h4>
+                    <canvas id="barChart4" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Asst. Tech. Secretary chart</h4>
+                    <canvas id="barChart5" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Fin. Secretary chart</h4>
+                    <canvas id="barChart6" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Treasurer chart</h4>
+                    <canvas id="barChart7" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Pub. Secretary chart</h4>
+                    <canvas id="barChart8" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Auditor chart</h4>
+                    <canvas id="barChart9" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Ex-Official I chart</h4>
+                    <canvas id="barChart10" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Ex-Official II chart</h4>
+                    <canvas id="barChart11" style="height:300px"></canvas>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+            <div class="container-fluid clearfix">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2020 </span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> EmmyVera 09034036212</span>
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- <script src="vendors/chart.js/Chart.min.js"></script> -->
+    <script src="js/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- For President Vote -->
+    <script>
+      const myVar = <%- JSON.stringify(pres_name); %>;
+        const voteNo = <%- JSON.stringify(pres_vote); %>;
+        var ctx = document.getElementById('barChart0');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: myVar,
+                datasets: [{
+                    data: voteNo,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- For Vice President -->
+    <script>
+      const myVar1 = <%- JSON.stringify(vp_name); %>;
+        const voteNo1 = <%- JSON.stringify(vp_vote); %>;
+        var ctx1 = document.getElementById('barChart1');
+        var myChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: myVar1,
+                datasets: [{
+                    data: voteNo1,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+    <!-- Gen. Secretary -->
+    <script>
+      const myVar2 = <%- JSON.stringify(gs_name); %>;
+        const voteNo2 = <%- JSON.stringify(gs_vote); %>;
+        var ctx2 = document.getElementById('barChart2');
+        var myChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: myVar2,
+                datasets: [{
+                    data: voteNo2,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Ast. Gen. Secretary -->
+    <script>
+      const myVar3 = <%- JSON.stringify(ags_name); %>;
+        const voteNo3 = <%- JSON.stringify(ags_vote); %>;
+        var ctx3 = document.getElementById('barChart3');
+        var myChart = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: myVar3,
+                datasets: [{
+                    data: voteNo3,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Tech. Secretary -->
+    <script>
+      const myVar4 = <%- JSON.stringify(ts_name); %>;
+        const voteNo4 = <%- JSON.stringify(ts_vote); %>;
+        var ctx4 = document.getElementById('barChart4');
+        var myChart = new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: myVar4,
+                datasets: [{
+                    data: voteNo4,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Ast. Tech. Secretary -->
+    <script>
+      const myVar5 = <%- JSON.stringify(ats_name); %>;
+        const voteNo5 = <%- JSON.stringify(ats_vote); %>;
+        var ctx5 = document.getElementById('barChart5');
+        var myChart = new Chart(ctx5, {
+            type: 'bar',
+            data: {
+                labels: myVar5,
+                datasets: [{
+                    data: voteNo5,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Fin. Secretary -->
+    <script>
+      const myVar6 = <%- JSON.stringify(fs_name); %>;
+        const voteNo6 = <%- JSON.stringify(fs_vote); %>;
+        var ctx6 = document.getElementById('barChart6');
+        var myChart = new Chart(ctx6, {
+            type: 'bar',
+            data: {
+                labels: myVar6,
+                datasets: [{
+                    data: voteNo6,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Treas. Secretary -->
+    <script>
+      const myVar7 = <%- JSON.stringify(t_name); %>;
+        const voteNo7 = <%- JSON.stringify(t_vote); %>;
+        var ctx7 = document.getElementById('barChart7');
+        var myChart = new Chart(ctx7, {
+            type: 'bar',
+            data: {
+                labels: myVar7,
+                datasets: [{
+                    data: voteNo7,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Pub. Secretary -->
+    <script>
+      const myVar8 = <%- JSON.stringify(ps_name); %>;
+        const voteNo8 = <%- JSON.stringify(ps_vote); %>;
+        var ctx8 = document.getElementById('barChart8');
+        var myChart = new Chart(ctx8, {
+            type: 'bar',
+            data: {
+                labels: myVar8,
+                datasets: [{
+                    data: voteNo8,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Gen. Secretary -->
+    <script>
+      const myVar9 = <%- JSON.stringify(a_name); %>;
+        const voteNo9 = <%- JSON.stringify(a_vote); %>;
+        var ctx9 = document.getElementById('barChart9');
+        var myChart = new Chart(ctx9, {
+            type: 'bar',
+            data: {
+                labels: myVar9,
+                datasets: [{
+                    data: voteNo9,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Gen. Secretary -->
+    <script>
+      const myVar10 = <%- JSON.stringify(eo1_name); %>;
+        const voteNo10 = <%- JSON.stringify(eo1_vote); %>;
+        var ctx10 = document.getElementById('barChart10');
+        var myChart = new Chart(ctx10, {
+            type: 'bar',
+            data: {
+                labels: myVar10,
+                datasets: [{
+                    data: voteNo10,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Gen. Secretary -->
+    <script>
+      const myVar11 = <%- JSON.stringify(eo2_name); %>;
+        const voteNo11 = <%- JSON.stringify(eo2_vote); %>;
+        var ctx11 = document.getElementById('barChart11');
+        var myChart = new Chart(ctx11, {
+            type: 'bar',
+            data: {
+                labels: myVar11,
+                datasets: [{
+                    data: voteNo11,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

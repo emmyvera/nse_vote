@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>E-VOTING PORTAL</title>
+	<style type="text/css">
+		body {
+			background-image: url(ure.jpg);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;}
+		#tab {
+			position: relative;
+			background-color: white;
+			width: 60%;
+			height: 200px;
+			left: 20%;
+			padding-left: 12px;
+			font-size: 20px;
+			margin-top: 25px;
+			padding-top: 2px;
+			padding-right: 2px;
+			box-shadow: 0px 0 8px 8px rgba(20,20,20,.1);
+		}
+		#vote:hover {
+			cursor: pointer;
+			background-color: white;
+			color: blue;}
+		#vote:active {
+			background-color: white; 
+			color: blue;}
+	</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<h1 style="text-align: center; font-family: georgia;">WELCOME TO THE VOTING PORTAL</h1>
+	<div class="container-lg">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+			<form action="/vote/" method="post">
+
+				<!-- Chairman -->
+				<div class="card card-body">
+						<strong><p>Select Your Preferred Candidate for Chairman</p></strong>
+					<div class="form-check" style="padding: 10px;">
+						<% for(var i=0; i < pres_result.length; i++) { %>
+							<input name="pres" class="form-check-input" type="radio" value="<%= pres_result[i].name %>"> <%= pres_result[i].name %> </input> </br>
+						 <% } %>
+					</div>
+				</div>
+
+				<!-- Vice Chairman -->
+				<div class="card card-body" style="margin-top: 10px;">
+					<strong><p>Select Your Preferred Candidate for Vice Chairman</p></strong>
+					<div class="form-check" style="padding: 10px;">
+						<% for(var i=0; i < vp_result.length; i++) { %>
+							<input name="vp" class="form-check-input" type="radio" value="<%= vp_result[i].name %>"> <%= vp_result[i].name %> </input> </br>
+						 <% } %>
+					</div>
+				</div>
+
+				<!-- General Secretary -->
+				<div class="card card-body" style="margin-top: 10px;">
+						<strong><p>Select Your Preferred Candidate for General Secretary</p></strong>
+					<div class="form-check" style="padding: 10px;">
+						<% for(var i=0; i < sec_result.length; i++) { %>
+							<input name="sec" class="form-check-input" type="radio" value="<%= sec_result[i].name %>"> <%= sec_result[i].name %> </input> </br>
+						<% } %>
+					</div>
+				</div>
+
+				<!-- Assistance General Secretary -->
+				<div class="card card-body" style="margin-top: 10px;">
+					<strong><p>Select Your Preferred Candidate for Assistant General Secretary</p></strong>
+					<div class="form-check" style="padding: 10px;">
+						<% for(var i=0; i < ags_result.length; i++) { %>
+							<input name="ags" class="form-check-input" type="radio" value="<%= ags_result[i].name %>"> <%= ags_result[i].name %> </input> </br>
+						<% } %>
+					</div>
+				</div>
+
+			<!-- Technical Secretary -->
+			<div class="card card-body" style="margin-top: 10px;">
+				<strong><p>Select Your Preferred Candidate for Technical Secretary</p></strong>
+				<div class="form-check" style="padding: 10px;">
+					<% for(var i=0; i < ts_result.length; i++) { %>
+						<input name="ts" class="form-check-input" type="radio" value="<%= ts_result[i].name %>"> <%= ts_result[i].name %> </input> </br>
+					<% } %>
+				</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Assistant Technical Secretary</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < ats_result.length; i++) { %>
+					<input name="ats" class="form-check-input" type="radio" value="<%= ats_result[i].name %>"> <%= ats_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Financial Secretary</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < fs_result.length; i++) { %>
+					<input name="fs" class="form-check-input" type="radio" value="<%= fs_result[i].name %>"> <%= fs_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Treasurer</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < t_result.length; i++) { %>
+					<input name="t" class="form-check-input" type="radio" value="<%= t_result[i].name %>"> <%= t_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Publicity Secretary</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < ps_result.length; i++) { %>
+					<input name="ps" class="form-check-input" type="radio" value="<%= ps_result[i].name %>"> <%= ps_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Auditor</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < a_result.length; i++) { %>
+					<input name="a" class="form-check-input" type="radio" value="<%= a_result[i].name %>"> <%= a_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Ex-Official I</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < eo1_result.length; i++) { %>
+					<input name="eo1" class="form-check-input" type="radio" value="<%= eo1_result[i].name %>"> <%= eo1_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+
+		<div class="card card-body" style="margin-top: 10px;">
+			<strong><p>Select Your Preferred Candidate for Ex-Official II</p></strong>
+			<div class="form-check" style="padding: 10px;">
+				<% for(var i=0; i < eo2_result.length; i++) { %>
+					<input name="eo2" class="form-check-input" type="radio" value="<%= eo2_result[i].name %>"> <%= eo2_result[i].name %> </input> </br>
+				<% } %>
+			</div>
+		</div>
+				<div style="margin-top: 10px;">
+					<button class="btn btn-primary btn-lg" type="submit">Vote</button>
+				  </div>
+			</form>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+	
+</body>
+</html>

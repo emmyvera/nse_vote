@@ -1,0 +1,32 @@
+CREATE TABLE `mod_voting`.`users_info`
+(   `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `email` VARCHAR(150) NOT NULL , 
+    `phone` VARCHAR(15) NOT NULL , 
+    `name` VARCHAR(150) NOT NULL , 
+    `vote_status` BOOLEAN NOT NULL DEFAULT FALSE , 
+    PRIMARY KEY (`id`), UNIQUE `email_inx` (`email`)) 
+    ENGINE = InnoDB;
+
+
+CREATE TABLE `mod_voting`.`candidate_info` 
+(   `id` INT(11) NOT NULL AUTO_INCREMENT ,
+ 	`candidate_id` INT(11) NOT NULL,
+    `name` VARCHAR(75) NOT NULL , 
+    `vote_count` INT(6) NOT NULL DEFAULT '0' , 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+
+CREATE TABLE `mod_voting`.`candidate_post` 
+(   `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `post` VARCHAR(75) NOT NULL , 
+    PRIMARY KEY (`id`)) 
+    ENGINE = InnoDB;
+
+CREATE TABLE `nse_db`.`admin`
+(   `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `email` VARCHAR(150) NOT NULL , 
+    `username` VARCHAR(150) NOT NULL , 
+    `password` VARCHAR(150) NOT NULL , 
+    PRIMARY KEY (`id`), UNIQUE `email_inx` (`email`))
+    ENGINE = InnoDB;
